@@ -1,2 +1,2 @@
 # Gwimbly-Fangame
-## Manny Aguilera and Omar Facundp
+## Manny Aguilera and Omar Facundo
