@@ -161,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294959133d8304c4793323cec8d2bdd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 160289469}
 --- !u!136 &160289470
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -193,7 +192,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160289466}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -412,7 +411,7 @@ GameObject:
   - component: {fileID: 1137680032}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

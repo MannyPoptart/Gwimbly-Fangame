@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\manny\\Documents\\CSCD477\\player_movement_test\\",
+  "WorkspaceRootPath": "C:\\Users\\manny\\Documents\\UnityGames\\Gwimbly-Fangame\\player_movement_test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A35F2D2D-26A0-A87B-4BD9-04075CB36719}|Assembly-CSharp.csproj|c:\\users\\manny\\documents\\cscd477\\player_movement_test\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A35F2D2D-26A0-A87B-4BD9-04075CB36719}|Assembly-CSharp.csproj|c:\\users\\manny\\documents\\unitygames\\gwimbly-fangame\\player_movement_test\\assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A35F2D2D-26A0-A87B-4BD9-04075CB36719}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\manny\\Documents\\CSCD477\\player_movement_test\\Assets\\Scripts\\Player.cs",
+              "DocumentMoniker": "C:\\Users\\manny\\Documents\\UnityGames\\Gwimbly-Fangame\\player_movement_test\\Assets\\Scripts\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player.cs",
-              "ToolTip": "C:\\Users\\manny\\Documents\\CSCD477\\player_movement_test\\Assets\\Scripts\\Player.cs",
+              "ToolTip": "C:\\Users\\manny\\Documents\\UnityGames\\Gwimbly-Fangame\\player_movement_test\\Assets\\Scripts\\Player.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAYwBkAAAAAAAAA",
+              "ViewState": "AQIAADEAAAAAAAAAAAAowDgAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-01T21:18:41.162Z",
               "EditorCaption": ""
