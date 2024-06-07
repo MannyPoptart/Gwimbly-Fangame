@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody rb;
     private bool isGrounded;
+    private bool isJumping;
+    private bool isFalling;
+    private bool isMoving;
+
+    public float speed = 5.0f;
+    public float jumpForce = 5.0f;
+    public float gravity = 9.8f;
+
+    private Rigidbody rb;
+    private Animator animator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // Prevent player from rotating on its own
+        animator = GetComponent<Animator>();
         rb.freezeRotation = true;
     }
 
@@ -21,67 +30,59 @@ public class Player : MonoBehaviour
 
     private void Movement()
     {
-        Vector3 direction = Vector3.zero;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.W))
+        Vector3 moveDirection = new Vector3(horizontal, 0.0f, vertical);
+        moveDirection = transform.TransformDirection(moveDirection);
+
+        if (moveDirection != Vector3.zero)
         {
-            direction += Vector3.forward;
-            // Make player face forward
-            transform.rotation = Quaternion.LookRotation(Vector3.back);
+            isMoving = true;
+            rb.velocity = moveDirection * speed;
         }
-        if (Input.GetKey(KeyCode.S))
+        else
         {
-            direction += Vector3.back;
-            // Make player face backward
-            transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction += Vector3.left;
-            // Make player face left
-            transform.rotation = Quaternion.LookRotation(Vector3.right);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            direction += Vector3.right;
-            // Make player face right
-            transform.rotation = Quaternion.LookRotation(Vector3.left);
+            isMoving = false;
         }
 
-        // Apply movement
-        transform.position += direction * Time.deltaTime * 3;
-
-        // Jumping
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded)
         {
-            rb.AddForce(Vector3.up * 3, ForceMode.Impulse);  // Adjust the force value as needed
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isJumping = true;
+                animator.SetBool("isJumping", true);
+                isGrounded = false;
+                animator.SetBool("isGrounded", false);
+            }
+            else
+            {
+                isJumping = false;
+                animator.SetBool("isJumping", false);
+            }
         }
-
-        // To allow higher jumps if space is held down
-        if (isGrounded && Input.GetKey(KeyCode.Space))
-        {
-            rb.AddForce(Vector3.up * 0.1f, ForceMode.Impulse);
-        }
-
-        // Keep the player upright
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        // Check if player is on the ground
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            animator.SetBool("isGrounded", true);
+            isFalling = false;
+            animator.SetBool("isFalling", false);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        // Check if player left the ground
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            animator.SetBool("isGrounded", false);
+            isFalling = true;
+            animator.SetBool("isFalling", true);
         }
     }
 }
