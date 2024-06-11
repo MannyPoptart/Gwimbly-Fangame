@@ -197,7 +197,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Armature|landing
-  m_Speed: 3
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2364387163090506650}
@@ -361,9 +361,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.20000005
+  m_TransitionDuration: 0.20000002
   m_TransitionOffset: 0
-  m_ExitTime: 0.7866637
+  m_ExitTime: 0.4541206
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

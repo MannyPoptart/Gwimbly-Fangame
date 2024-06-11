@@ -9,80 +9,74 @@ public class Player : MonoBehaviour
     private bool isFalling;
     private bool isMoving;
 
-    public float speed = 5.0f;
-    public float jumpForce = 5.0f;
-    public float gravity = 9.8f;
-
-    private Rigidbody rb;
+    private CharacterController character;
     private Animator animator;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
+    public float speed = 5f;
+    public float jumpForce = 7f;
+    public float gravity = 10f;
+    
+    Vector3 move = Vector3.zero;
+    
+
+    void Start() {
+        character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        rb.freezeRotation = true;
+        
     }
 
-    private void Update()
-    {
+    void Update() {
+
         Movement();
+        HandleAnimations();
+
+        // Debug line to see how far the character is from the ground
+        // Debug.DrawRay(transform.position, Vector3.down * 1.1f, Color.red);
+
     }
 
-    private void Movement()
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+    private void Movement() {
+        // Check if the character is grounded using a raycast
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.08f);
 
-        Vector3 moveDirection = new Vector3(horizontal, 0.0f, vertical);
-        moveDirection = transform.TransformDirection(moveDirection);
+        Vector3 horizontalMove = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        horizontalMove = transform.TransformDirection(horizontalMove);
+        horizontalMove *= speed;
 
-        if (moveDirection != Vector3.zero)
-        {
-            isMoving = true;
-            rb.velocity = moveDirection * speed;
+        if (isGrounded) {
+
+            if (Input.GetButtonDown("Jump")) {
+                move.y = jumpForce;
+                isJumping = true;
+                isFalling = false;
+            } else {
+                isJumping = false;
+                isFalling = false;
+                move.y = 0f;  // Reset vertical velocity when grounded
+            }
+
+        } else {
+            move.y -= gravity * Time.deltaTime;  // Apply gravity over time
+            isFalling = true;
         }
-        else
-        {
+
+        if (horizontalMove.x != 0 || horizontalMove.z != 0) {
+            isMoving = true;
+        } else {
             isMoving = false;
         }
 
-        if (isGrounded)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isJumping = true;
-                animator.SetBool("isJumping", true);
-                isGrounded = false;
-                animator.SetBool("isGrounded", false);
-            }
-            else
-            {
-                isJumping = false;
-                animator.SetBool("isJumping", false);
-            }
-        }
+        character.Move((horizontalMove + new Vector3(0, move.y, 0)) * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            animator.SetBool("isGrounded", true);
-            isFalling = false;
-            animator.SetBool("isFalling", false);
-        }
+
+
+
+    private void HandleAnimations() {
+        animator.SetBool("isGrounded", isGrounded);
+        animator.SetBool("isJumping", isJumping);
+        animator.SetBool("isFalling", isFalling);
+        animator.SetBool("isMoving", isMoving);
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-            animator.SetBool("isGrounded", false);
-            isFalling = true;
-            animator.SetBool("isFalling", true);
-        }
-    }
 }
