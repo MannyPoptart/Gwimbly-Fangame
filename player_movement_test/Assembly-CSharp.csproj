@@ -60,7 +60,42 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\ActivateCamOnPlay.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\ActivateCameraWithDistance.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\CameraMagnets\CameraMagnetProperty.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\InputSystemHelper.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\SpawnInCircle.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\InvokeEventFromInspector.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\ExampleHelpWindow.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\DualTarget\MoveAimTarget.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\DualTarget\PointAtAimTarget.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\BossCamera\CustomLockCameraY.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\PlayerMove.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Models\UnityCharacter\Scripts\CharacterMovementNoCamera.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Models\UnityCharacter\Scripts\CharacterMovement.cs" />
+    <Compile Include="Assets\Scripts\ThirdPersonCam.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\Anywhere Door\TagChanger.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\Anywhere Door\PlayerMovement.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\BossCamera\BossLookAt.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\Anywhere Door\PlayerLookAt.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\FadeOutNearbyObjects\CinemachineFadeOutNearbyObjects.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\Trigger volumes\GenericTrigger.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\ThirdPersonFollowDistanceModifier.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\PlayerMovePhysics.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\SimpleElevator.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\PlayerMoveOnSphere.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\3rdPersonWithAimMode\ActivateOnKeypress.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\2D\MouseScrollZoom2D.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Models\UnityCharacter\Scripts\CharacterMovement2D.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\CameraMagnets\CameraMagnetTargetController.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\Scripting\ScriptingExample.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\2D\LoseSightWhenTargetsFallsOffThePlatform.cs" />
+    <Compile Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Shared\Scripts\MixingCameraBlend.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\FadeOutNearbyObjects\FadeOut.shader" />
+    <None Include="Assets\Samples\Cinemachine\2.9.7\Cinemachine Example Scenes\Scenes\Anywhere Door\ScreenCutoutShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -911,6 +946,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
       <Private>False</Private>
@@ -975,6 +1014,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
       <Private>False</Private>
@@ -985,6 +1028,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AimingRig.csproj">
+      <Project>{9E18AE7B-729E-D62C-5EB1-32E5B4A08724}</Project>
+      <Name>AimingRig</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
