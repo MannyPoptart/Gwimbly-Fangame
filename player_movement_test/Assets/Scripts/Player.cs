@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float gravityMultiplier;
 
     [SerializeField]
-    private float jumpHorizontalSpeed;
+    private float movementSpeed;
 
     [SerializeField]
     private float jumpButtonGracePeriod;
@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
     private bool isFalling;
-    private bool isMoving;
 
     // Start is called before the first frame update
     void Start()
@@ -62,14 +61,17 @@ public class Player : MonoBehaviour
 
         float gravity = Physics.gravity.y * gravityMultiplier;
 
-        if (isJumping && ySpeed > 0 && Input.GetButton("Jump") == false)
+        if (isJumping && ySpeed > 0 && !Input.GetButton("Jump"))
         {
             gravity *= 2;
         }
 
         ySpeed += gravity * Time.deltaTime;
 
-        if (characterController.isGrounded)
+        bool wasGrounded = isGrounded;
+        isGrounded = characterController.isGrounded;
+
+        if (isGrounded)
         {
             lastGroundedTime = Time.time;
         }
@@ -84,14 +86,13 @@ public class Player : MonoBehaviour
             characterController.stepOffset = originalStepOffset;
             ySpeed = -0.5f;
             animator.SetBool("isGrounded", true);
-            isGrounded = true;
             animator.SetBool("isJumping", false);
             isJumping = false;
             animator.SetBool("isFalling", false);
 
             if (Time.time - jumpButtonPressedTime <= jumpButtonGracePeriod)
             {
-                ySpeed = Mathf.Sqrt(jumpHeight * -3 * gravity);
+                ySpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 animator.SetBool("isJumping", true);
                 isJumping = true;
                 jumpButtonPressedTime = null;
@@ -102,7 +103,6 @@ public class Player : MonoBehaviour
         {
             characterController.stepOffset = 0;
             animator.SetBool("isGrounded", false);
-            isGrounded = false;
 
             if ((isJumping && ySpeed < 0) || ySpeed < -2)
             {
@@ -115,35 +115,38 @@ public class Player : MonoBehaviour
             animator.SetBool("isMoving", true);
 
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-
-            if (isGrounded)
-            {
-                Vector3 velocity = movementDirection * inputMagnitude * jumpHorizontalSpeed;
-                velocity.y = ySpeed;
-
-                characterController.Move(velocity * Time.deltaTime * 2);
-            }
         }
         else
         {
             animator.SetBool("isMoving", false);
         }
 
-        if (isGrounded == false)
-        {
-            Vector3 velocity = movementDirection * inputMagnitude * jumpHorizontalSpeed;
-            velocity.y = ySpeed;
+        Vector3 velocity = movementDirection * inputMagnitude * movementSpeed;
+        velocity.y = ySpeed;
 
-            characterController.Move(velocity * Time.deltaTime);
+        characterController.Move(velocity * Time.deltaTime);
+
+        // Update falling and landing animations immediately when grounded state changes
+        if (wasGrounded != isGrounded)
+        {
+            if (isGrounded)
+            {
+                animator.SetBool("isFalling", false);
+                animator.SetBool("isGrounded", true);
+            }
+            else
+            {
+                animator.SetBool("isGrounded", false);
+                animator.SetBool("isFalling", true);
+            }
         }
 
-        Debug.Log("Movement Direction: " + movementDirection);
-        Debug.Log("Input Magnitude: " + inputMagnitude);
-        Debug.Log("ySpeed: " + ySpeed);
-        Debug.Log("isGrounded: " + isGrounded);
-        Debug.Log("isJumping: " + isJumping);
+        // Debug.Log("Movement Direction: " + movementDirection);
+        // Debug.Log("Input Magnitude: " + inputMagnitude);
+        // Debug.Log("ySpeed: " + ySpeed);
+        // Debug.Log("isGrounded: " + isGrounded);
+        // Debug.Log("isJumping: " + isJumping);
     }
 
     private void OnAnimatorMove()
@@ -157,15 +160,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnApplicationFocus(bool focus)
+    // private void OnApplicationFocus(bool focus)
+    // {
+    //     if (focus)
+    //     {
+    //         Cursor.lockState = CursorLockMode.Locked;
+    //     }
+    //     else
+    //     {
+    //         Cursor.lockState = CursorLockMode.None;
+    //     }
+    // }
+
+    // When the player comes into contact with the canned corn's cube collider with tag of CollectZone, the canned corn will be destroyed and the score will increase by 1
+    private void OnTriggerEnter(Collider other)
     {
-        if (focus)
+        if (other.tag == "CannedCorn")
         {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
+            Destroy(other.gameObject);
+            Debug.Log("Canned Corn Collected");
         }
     }
 }
